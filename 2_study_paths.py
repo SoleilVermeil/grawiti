@@ -10,12 +10,12 @@ import tarfile
 import shutil
 import multiprocessing
 
-def perm(M, max_complexity: int = 1e7) -> float:
+def perm(M, max_complexity: int) -> float:
     n = M.shape[0]
     complexity = n * 2**n
-    logging.debug(f"Computing the permanent of a {n}x{n} matrix. Estimated complexity: {complexity:.0f}.")
+    logging.debug(f"    Computing the permanent of a {n}x{n} matrix. Estimated complexity: {complexity:.0f}.")
     if complexity > max_complexity:
-        logging.debug(f"Complexity too high (threshold : {max_complexity:.0f}). Returning -1 as fallback.")
+        logging.debug(f"    Complexity too high (threshold : {max_complexity:.0f}). Returning -1 as fallback.")
         return -1
     d = np.ones(n)
     j =  0
@@ -75,9 +75,9 @@ def get_pairs_if_pairable(G: nx.Graph, max_complexity: int) -> bool:
 def study_paths(
     junction_name: str,
     max_path_count: int = 1e5,
+    max_complexity: int = 1e7,
     truncation: bool = True,
     print_numbers: bool = False,
-    max_complexity: int = 1e7
 ):
     
     # Loading junction
@@ -263,7 +263,7 @@ def study_paths(
         "edges": len(list(G.edges)),
         "pairable": any(pairable_paths),
         "determinant": int(np.linalg.det(nx.to_numpy_array(G))),
-        "permanent": int(perm(nx.to_numpy_array(G), max_complexity=1e7)),
+        "permanent": int(perm(nx.to_numpy_array(G), max_complexity=max_complexity)),
         "pathsdetailed": [
             {
                 "path": path,
@@ -287,16 +287,6 @@ def study_paths(
     logging.warning(f"Done studying junction {junction_name}!")
     
     return True
-
-def main():
-    
-    study_paths(
-        junction_name=os.path.basename(junction),
-        max_path_count=max_path_count,
-        max_complexity=max_complexity,
-        truncation=True,
-        print_numbers=False,
-    )
     
 if __name__ == '__main__':
     
@@ -324,28 +314,6 @@ if __name__ == '__main__':
         tar.extractall()
     
     junctions = glob.glob("data/junction_*")
-    
-    # for i, junction in enumerate(junctions):
-    #     junction_name = os.path.basename(junction)
-    #     logging.info(f"Studying junction {junction_name}...")
-    #     success = study_paths(
-    #         junction_name=junction_name,
-    #         max_path_count=max_path_count,
-    #         max_complexity=max_complexity,
-    #         truncation=True,
-    #         print_numbers=False,
-    #     )
-    #     if not success:
-    #         shutil.rmtree(junction)
-            
-    # for i, junction in enumerate(junctions):
-    #     study_paths(
-    #         junction_name=os.path.basename(junction),
-    #         max_path_count=max_path_count,
-    #         max_complexity=max_complexity,
-    #         truncation=True,
-    #         print_numbers=False,
-    #     )
     
     number_of_processes = multiprocessing.cpu_count()
     with multiprocessing.Pool(number_of_processes) as pool:
