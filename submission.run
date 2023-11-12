@@ -4,10 +4,10 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=1:00:00
 
-rm -r data
-rm data_finalized.zar.gz
+rm -f -r data
+rm -f data_finalized.zar.gz
 
 module load gcc python
 source /home/juleuenb/venvs/c3mp/bin/activate
-srun python3 study_paths.py --maxcomplexity 10000000 --maxpaths 1000
+srun python3 2_study_paths.py --maxcomplexity 10000000 --maxpaths 1000
 deactivate
