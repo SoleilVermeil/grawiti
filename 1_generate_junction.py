@@ -119,8 +119,8 @@ def generate_junction():
     # Defining the system
     # -------------------
     
-    scatter_width = random.randint(3, 5)
-    scatter_length = random.randint(1, 3) + 0.5 * random.randint(0, 1)
+    scatter_width = random.randint(3, 10)
+    scatter_length = random.randint(1, 5) + 0.5 * random.randint(0, 1)
     lead_width = 2 # NOTE: Other values are not supported yet
     scatter_up_shift = random.randint(-1, 1)
     left_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
@@ -213,7 +213,7 @@ if __name__ == '__main__':
     for _ in tqdm(range(1000)):
         generate_junction()
         
-    with tarfile.open("data.tar.gz", "w:gz") as tar:
-        tar.add("data")
+    # with tarfile.open("data.tar.gz", "w:gz") as tar:
+    #     tar.add("data")
         
-    shutil.rmtree("data")
+    # shutil.rmtree("data")

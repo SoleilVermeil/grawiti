@@ -9,6 +9,7 @@ import argparse
 import tarfile
 import shutil
 import multiprocessing
+import time
 
 def perm(M, max_complexity: int) -> float:
     n = M.shape[0]
@@ -172,14 +173,6 @@ def study_paths(
         logging.debug(f"    Looking at path: {path}")
         G_without_path = G.copy()
         G_without_path.remove_nodes_from(path)
-        # try:
-        #     n = np.shape(nx.adjacency_matrix(G=G_without_path))[0]
-        # except nx.exception.NetworkXError:
-        #     n = 0
-        # logging.warning(f"Estimated complexity for computing the permanent = {n * 2**n:.0f}.")
-        # if n * 2**n > 1e6:
-        #     logging.warning(f"Complexity too high. Skipping.")
-        #     return False
         pairs, permanent = get_pairs_if_pairable(G_without_path, max_complexity=max_complexity)
         pairable_path = len(pairs) > 0
         pairable_paths.append(pairable_path)
@@ -220,7 +213,7 @@ def study_paths(
                     )
                     shortest_path_drawn = True
     
-    # NOTE: If (none of) the shortest path(s) is pairable, then we draw it now.
+    # NOTE: If none of the shortest path(s) is pairable, then we draw it now.
     if not shortest_path_drawn:
         for i in range(len(paths[0])-1):
             pos_1 = pos[paths[0][i]]
@@ -238,9 +231,6 @@ def study_paths(
     # ---------------------
     
     ax.axis('off')
-    file_name = f"data/{junction_name}/plot.png"
-    plt.savefig(file_name)
-    plt.close()
     
     # Saving the data
     # ---------------
@@ -282,7 +272,23 @@ def study_paths(
             for i in range(len(lengths)) if pairable[i] + unpairable[i] > 0
         ]
     }
-    json.dump(d, open(f"data/{junction_name}/paths.json", "w"), indent=4)
+    
+    if not os.path.exists(f"data_finalized/{junction_name}"):
+        os.makedirs(f"data_finalized/{junction_name}")
+    
+    json.dump(d, open(f"data_finalized/{junction_name}/paths.json", "w"), indent=4)
+    
+    file_name = f"data_finalized/{junction_name}/plot.png"
+    plt.savefig(file_name)
+    plt.close()
+    
+    truncated_adjacancy_matrix = nx.to_numpy_array(G)
+    np.savetxt(f"data_finalized/{junction_name}/adjacancy_truncated.txt", truncated_adjacancy_matrix, fmt="%d")
+    
+    # Copy the other files to the new folder
+    # --------------------------------------
+    
+    shutil.copytree(f"data/{junction_name}", f"data_finalized/{junction_name}", dirs_exist_ok=True)
     
     logging.warning(f"Done studying junction {junction_name}!")
     
@@ -294,7 +300,6 @@ if __name__ == '__main__':
     # ------------------
     
     logging.basicConfig(level=logging.WARNING, format="[%(asctime)s] [%(levelname)8s] --- %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-
     
     # Making the parser
     # -----------------
@@ -302,6 +307,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Study paths in a junction.')
     parser.add_argument('--maxpaths', type=int, default=1000, help='Maximum number of paths to study.')
     parser.add_argument('--maxcomplexity', type=int, default=1000000, help='Maximum complexity of the permanent.')
+    parser.add_argument('--restrict', type=int, default=0, help='Restrict the indices of junctions to study.')
     
     max_path_count = parser.parse_args().maxpaths
     max_complexity = parser.parse_args().maxcomplexity
@@ -310,12 +316,21 @@ if __name__ == '__main__':
     # ----------------------
     # NOTE: The archive is called 'data.tar.gz'
     
-    with tarfile.open("data.tar.gz", "r:gz") as tar:
-        tar.extractall()
+    # with tarfile.open("data.tar.gz", "r:gz") as tar:
+    #     tar.extractall()
     
-    junctions = glob.glob("data/junction_*")
+    
+    if parser.parse_args().restrict == 0:
+        junctions = glob.glob("data/junction_*")
+    else:
+        time.sleep(parser.parse_args().restrict) # Delay to avoid conflicts
+        junctions = glob.glob(f"data/junction_{parser.parse_args().restrict}*")
+        
+    if not os.path.exists("data_finalized"):
+        os.makedirs("data_finalized")
     
     number_of_processes = multiprocessing.cpu_count()
+    logging.warning(f"Using {number_of_processes} processes.")
     with multiprocessing.Pool(number_of_processes) as pool:
         pool.starmap(
             study_paths,
@@ -334,7 +349,7 @@ if __name__ == '__main__':
     # Compressing the data again
     # --------------------------
     
-    with tarfile.open("data_finalized.tar.gz", "w:gz") as tar:
-        tar.add("data")
+    # with tarfile.open("data_finalized.tar.gz", "w:gz") as tar:
+    #     tar.add("data")
         
-    shutil.rmtree("data")
+    # shutil.rmtree("data")
