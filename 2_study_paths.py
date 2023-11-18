@@ -325,6 +325,7 @@ if __name__ == '__main__':
     else:
         time.sleep(parser.parse_args().restrict) # Delay to avoid conflicts
         junctions = glob.glob(f"data/junction_{parser.parse_args().restrict}*")
+    logging.warning(f"Found {len(junctions)} junctions.")
         
     if not os.path.exists("data_finalized"):
         os.makedirs("data_finalized")
