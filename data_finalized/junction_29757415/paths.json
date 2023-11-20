@@ -1,0 +1,251 @@
+{
+    "name": "junction_29757415",
+    "nodes": 18,
+    "edges": 21,
+    "pairable": false,
+    "determinant": -24,
+    "permanent": 25,
+    "pathsdetailed": [
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                14,
+                3,
+                12
+            ],
+            "length": 7,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                5,
+                14,
+                3,
+                12
+            ],
+            "length": 7,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                6,
+                15,
+                3,
+                12
+            ],
+            "length": 7,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                17,
+                6,
+                15,
+                3,
+                12
+            ],
+            "length": 9,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                6,
+                15,
+                4,
+                13,
+                1,
+                12
+            ],
+            "length": 9,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                14,
+                3,
+                15,
+                4,
+                13,
+                1,
+                12
+            ],
+            "length": 11,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                17,
+                6,
+                15,
+                4,
+                13,
+                1,
+                12
+            ],
+            "length": 11,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                5,
+                14,
+                3,
+                15,
+                4,
+                13,
+                1,
+                12
+            ],
+            "length": 11,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                6,
+                15,
+                4,
+                13,
+                2,
+                11,
+                0,
+                10,
+                1,
+                12
+            ],
+            "length": 13,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                14,
+                3,
+                15,
+                4,
+                13,
+                2,
+                11,
+                0,
+                10,
+                1,
+                12
+            ],
+            "length": 15,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                7,
+                16,
+                5,
+                17,
+                6,
+                15,
+                4,
+                13,
+                2,
+                11,
+                0,
+                10,
+                1,
+                12
+            ],
+            "length": 15,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                18,
+                8,
+                17,
+                5,
+                14,
+                3,
+                15,
+                4,
+                13,
+                2,
+                11,
+                0,
+                10,
+                1,
+                12
+            ],
+            "length": 15,
+            "pairable": false,
+            "permanent": 0.0
+        }
+    ],
+    "paths": [
+        {
+            "length": 7,
+            "pairable": 0,
+            "unpairable": 3
+        },
+        {
+            "length": 9,
+            "pairable": 0,
+            "unpairable": 2
+        },
+        {
+            "length": 11,
+            "pairable": 0,
+            "unpairable": 3
+        },
+        {
+            "length": 13,
+            "pairable": 0,
+            "unpairable": 1
+        },
+        {
+            "length": 15,
+            "pairable": 0,
+            "unpairable": 3
+        }
+    ]
+}

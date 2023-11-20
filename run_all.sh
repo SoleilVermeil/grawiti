@@ -12,7 +12,7 @@ echo "#!/bin/bash -l
 
 module load gcc python
 source /home/juleuenb/venvs/c3mp/bin/activate
-srun python3 2_study_paths.py --maxcomplexity 10000000 --maxpaths 1000 --restrict $i
+srun python3 2_study_paths.py --maxcomplexity 100000000 --maxpaths 1000 --restrict $i
 deactivate" > submission_$i.run
 
 sbatch submission_$i.run

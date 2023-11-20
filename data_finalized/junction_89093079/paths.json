@@ -1,0 +1,155 @@
+{
+    "name": "junction_89093079",
+    "nodes": 16,
+    "edges": 18,
+    "pairable": true,
+    "determinant": 1,
+    "permanent": 1,
+    "pathsdetailed": [
+        {
+            "path": [
+                7,
+                14,
+                4,
+                11,
+                1,
+                10,
+                0,
+                9
+            ],
+            "length": 8,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                14,
+                4,
+                13,
+                3,
+                10,
+                0,
+                9
+            ],
+            "length": 8,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                14,
+                4,
+                13,
+                3,
+                12,
+                2,
+                9
+            ],
+            "length": 8,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                15,
+                6,
+                13,
+                3,
+                10,
+                0,
+                9
+            ],
+            "length": 8,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                15,
+                6,
+                13,
+                3,
+                12,
+                2,
+                9
+            ],
+            "length": 8,
+            "pairable": true,
+            "permanent": 1.0
+        },
+        {
+            "path": [
+                7,
+                14,
+                4,
+                11,
+                1,
+                10,
+                3,
+                12,
+                2,
+                9
+            ],
+            "length": 10,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                15,
+                6,
+                13,
+                4,
+                11,
+                1,
+                10,
+                0,
+                9
+            ],
+            "length": 10,
+            "pairable": false,
+            "permanent": 0.0
+        },
+        {
+            "path": [
+                7,
+                15,
+                6,
+                13,
+                4,
+                11,
+                1,
+                10,
+                3,
+                12,
+                2,
+                9
+            ],
+            "length": 12,
+            "pairable": true,
+            "permanent": 1.0
+        }
+    ],
+    "paths": [
+        {
+            "length": 8,
+            "pairable": 1,
+            "unpairable": 4
+        },
+        {
+            "length": 10,
+            "pairable": 0,
+            "unpairable": 2
+        },
+        {
+            "length": 12,
+            "pairable": 1,
+            "unpairable": 0
+        }
+    ]
+}

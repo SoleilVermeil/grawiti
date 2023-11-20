@@ -1,0 +1,59 @@
+{
+    "name": "junction_23159293",
+    "nodes": 10,
+    "edges": 11,
+    "pairable": true,
+    "determinant": -8,
+    "permanent": 9,
+    "pathsdetailed": [
+        {
+            "path": [
+                2,
+                6,
+                0,
+                5
+            ],
+            "length": 4,
+            "pairable": true,
+            "permanent": 4.0
+        },
+        {
+            "path": [
+                2,
+                8,
+                1,
+                5
+            ],
+            "length": 4,
+            "pairable": true,
+            "permanent": 1.0
+        },
+        {
+            "path": [
+                2,
+                8,
+                4,
+                9,
+                3,
+                7,
+                1,
+                5
+            ],
+            "length": 8,
+            "pairable": true,
+            "permanent": 1.0
+        }
+    ],
+    "paths": [
+        {
+            "length": 4,
+            "pairable": 2,
+            "unpairable": 0
+        },
+        {
+            "length": 8,
+            "pairable": 1,
+            "unpairable": 0
+        }
+    ]
+}

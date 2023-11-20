@@ -1,0 +1,39 @@
+{
+    "name": "junction_27891176",
+    "nodes": 8,
+    "edges": 8,
+    "pairable": true,
+    "determinant": 1,
+    "permanent": 1,
+    "pathsdetailed": [
+        {
+            "path": [
+                2,
+                5,
+                0,
+                4
+            ],
+            "length": 4,
+            "pairable": true,
+            "permanent": 1.0
+        },
+        {
+            "path": [
+                2,
+                7,
+                1,
+                4
+            ],
+            "length": 4,
+            "pairable": false,
+            "permanent": 0.0
+        }
+    ],
+    "paths": [
+        {
+            "length": 4,
+            "pairable": 1,
+            "unpairable": 1
+        }
+    ]
+}

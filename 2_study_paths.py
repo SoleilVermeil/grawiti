@@ -84,6 +84,7 @@ def study_paths(
     # Loading junction
     # ----------------
     
+    logging.warning(f"Studying junction {junction_name}...")
     junction_path = f"data/{junction_name}"
     adjacancy_matrix = np.loadtxt(f"{junction_path}/adjacancy.txt", dtype=int)
     
@@ -174,9 +175,11 @@ def study_paths(
         G_without_path = G.copy()
         G_without_path.remove_nodes_from(path)
         pairs, permanent = get_pairs_if_pairable(G_without_path, max_complexity=max_complexity)
+        logging.info(f"    Number of pairs: {len(pairs)}")
         pairable_path = len(pairs) > 0
         pairable_paths.append(pairable_path)
         permanents.append(permanent)
+        logging.info(f"    Permanent: {permanent}")
         
         if pairable_path and not path_drawn:
             
@@ -341,7 +344,7 @@ if __name__ == '__main__':
                     max_path_count,
                     max_complexity,
                     True,
-                    False,
+                    True,
                 )
                 for junction in junctions
             ]
