@@ -114,17 +114,24 @@ def compute_conductance(fsyst, energies: list, t: float) -> list:
     return conductance
 
 
-def generate_junction():
+def generate_junction(
+    scatter_width: int = None,
+    scatter_length: int = None,
+    lead_width: int = None,
+    scatter_up_shift: int = None,
+    left_lead_up_shift: int = None,
+    right_lead_up_shift: int = None,
+):
     
     # Defining the system
     # -------------------
     
-    scatter_width = random.randint(3, 10)
-    scatter_length = random.randint(1, 5) + 0.5 * random.randint(0, 1)
+    if scatter_width is None: scatter_width = random.randint(3, 10)
+    if scatter_length is None: scatter_length = random.randint(1, 5) + 0.5 * random.randint(0, 1)
     lead_width = 2 # NOTE: Other values are not supported yet
-    scatter_up_shift = random.randint(-1, 1)
-    left_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
-    right_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
+    if scatter_up_shift is None: scatter_up_shift = random.randint(-1, 1)
+    if left_lead_up_shift is None: left_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
+    if right_lead_up_shift is None: right_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
     try:
         logging.info(f"Building a system with the following parameters:")
         logging.info(f"* scatter_width =       {scatter_width}")
@@ -210,9 +217,31 @@ if __name__ == '__main__':
         else:
             raise ValueError("Invalid answer.")
     
-    for _ in tqdm(range(1000)):
-        generate_junction()
-        
+    # for _ in tqdm(range(1000)):
+    #     generate_junction()
+    
+    # if scatter_width is None: scatter_width = random.randint(3, 10)
+    # if scatter_length is None: scatter_length = random.randint(1, 5) + 0.5 * random.randint(0, 1)
+    # lead_width = 2 # NOTE: Other values are not supported yet
+    # if scatter_up_shift is None: scatter_up_shift = random.randint(-1, 1)
+    # if left_lead_up_shift is None: left_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
+    # if right_lead_up_shift is None: right_lead_up_shift = random.randint(0, math.floor(scatter_width / 2) * 2 - 1)
+
+    for scatter_width in tqdm(np.arange(3, 10 + 1)):
+        for scatter_length in np.arange(1, 5 + 1, 0.5):
+            for scatter_up_shift in np.arange(-1, 1 + 1):
+                for left_lead_up_shift in np.arange(0, math.floor(scatter_width / 2) * 2 - 1 + 1):
+                    for right_lead_up_shift in np.arange(left_lead_up_shift, math.floor(scatter_width / 2) * 2 - 1 + 1):
+                        generate_junction(
+                            scatter_width = scatter_width,
+                            scatter_length = scatter_length,
+                            lead_width = 2,
+                            scatter_up_shift = scatter_up_shift,
+                            left_lead_up_shift = left_lead_up_shift,
+                            right_lead_up_shift = right_lead_up_shift,
+                        )
+    
+    
     # with tarfile.open("data.tar.gz", "w:gz") as tar:
     #     tar.add("data")
         

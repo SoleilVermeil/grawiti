@@ -1,0 +1,1 @@
+scp -r -O -q data juleuenb@jed:/scratch/juleuenb/grawiti
